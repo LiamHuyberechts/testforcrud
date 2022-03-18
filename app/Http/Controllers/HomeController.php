@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        return view('home');
+        $students = Student::with('team')->orderBy('team_id')->get();
+        return view('home', ['students'=> $students]);
     }
 }

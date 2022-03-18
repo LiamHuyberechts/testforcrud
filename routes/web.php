@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeamController;
 use App\Student;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('/student', 'StudentController');
+Route::resource('/team', 'TeamController');
