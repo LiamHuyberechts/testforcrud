@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
 use App\Team;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Team::with('students')->get();
-        return view('team.index', ['teams'=> $teams]);
+        $result = compact('teams');
+        return view('team.index', $result);
     }
 
     /**
@@ -25,7 +27,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('team.create');
     }
 
     /**
@@ -36,7 +38,13 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate([
+            'name'=>'required'
+        ]);
+
+        Team::create($request->all());
+
+        return redirect('team');
     }
 
     /**
@@ -47,7 +55,9 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        $students = Student::where('team_id', '=', $team->id)->with('team')->get();
+
+        return view('team.show', compact('students', 'team'));
     }
 
     /**
@@ -81,6 +91,8 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        $team ->delete();
+
+        return redirect('team');
     }
 }

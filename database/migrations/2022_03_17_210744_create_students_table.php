@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->foreignId("team_id")->nullable();
             $table->boolean("active")->nullable();
 
-            $table->foreign("team_id")->references("id")->on("teams");
+            $table->foreign("team_id")->references("id")->on("teams")->nullOnDelete();
 
         });
     }

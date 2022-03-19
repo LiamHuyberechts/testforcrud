@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{route('student.create')}}">Create New</a>
-    @foreach($students as $student)
-        <p>Student Name: {{$student->name}}</p>
-        <p class="">
-            Team name: {{$student->team->name}}
+    <a class="btn btn-primary" href="{{route('student.create')}}">Create New</a>
+    <div class="d-flex row">
+        @foreach($students as $student)
+            <div class="col-4 border">
+                <p>Student Name: {{$student->name}}</p>
 
-        <form action="{{route('student.destroy', $student->id)}}" method="post">
-            @csrf
-            @method('DELETE')
-            <input type="submit" value="DELETE">
-        </form>
-        </p>
+                Team name: <span class="font-weight-bolder">{{$student->team->name ?? 'no Team'}}</span>
 
-    @endforeach
+                <form action="{{route('student.destroy', $student->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input class="btn-danger" type="submit" value="DELETE">
+                </form>
+                </div>
+
+        @endforeach
+    </div>
 @endsection

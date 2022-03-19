@@ -13,9 +13,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with('team')->get();
+        $students = Student::OrderBy('team_id', 'desc')->with('team')->get();
+        $result = compact('students');
 
-        return view('student.index', ['students' =>$students]);
+        return view('student.index', $result);
 
     }
 
@@ -40,7 +41,7 @@ class StudentController extends Controller
         $request ->validate([
             'name'=>'required',
             'rnumber'=>'required',
-            'team_id'=>'required',
+//            'team_id'=>'required',
             'active'=>'required'
         ]);
         Student::create($request->all());

@@ -1,4 +1,7 @@
-This is the create page
+
+@extends('layouts.app')
+@section('content')
+    <a href="{{route('student.index')}}">Back to students</a>
 <form action="{{route('student.store')}}" method="post">
     @csrf
     <input type="text" name="name" placeholder="name">
@@ -7,3 +10,4 @@ This is the create page
     <input type="number" name="active" placeholder="active">
     <input type="submit">
 </form>
+@endsection
