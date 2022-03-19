@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Student;
+use App\Team;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -68,7 +69,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::with('team')->findOrFail($id);
+        $teams = Team::get();
+        $result = compact('student', 'teams');
+
+        return view('student.edit', $result);
     }
 
     /**
@@ -80,7 +85,15 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request ->validate([
+            'name'=>'required',
+            'rnumber'=>'required',
+            'team_id'=>'required',
+            'active'=>'required'
+        ]);
+        Student::findOrFail($id)->update($request->all());
+
+        return redirect('student');
     }
 
     /**

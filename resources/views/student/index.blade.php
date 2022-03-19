@@ -8,7 +8,7 @@
                 <p>Student Name: {{$student->name}}</p>
 
                 Team name: <span class="font-weight-bolder">{{$student->team->name ?? 'no Team'}}</span>
-
+                <a class="btn btn-info m-1" href="{{ route('student.edit',$student->id) }}">EDIT</a>
                 <form action="{{route('student.destroy', $student->id)}}" method="post">
                     @csrf
                     @method('DELETE')
