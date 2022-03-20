@@ -12,4 +12,8 @@ class Team extends Model
     public function students(){
         return $this->hasMany("App\Student");
     }
+
+    public function session(){
+        return $this->belongsTo('App\Session')->withDefault();
+    }
 }

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\TeamController;
+use App\Session;
 use App\Student;
+use App\Team;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $students = Student::get();
+    $teams = Team::get();
+    $sessions = Session::get();
+    $result = compact('students', 'teams', 'sessions');
 
-    return view('welcome', ['students' =>$students]);
+    return view('welcome', $result);
 });
 
 Auth::routes();
@@ -26,3 +31,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('/student', 'StudentController');
 Route::resource('/team', 'TeamController');
+Route::resource('/session', 'SessionController');
