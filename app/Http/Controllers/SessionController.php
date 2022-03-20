@@ -26,7 +26,9 @@ class SessionController extends Controller
      */
     public function create()
     {
-        //
+        $sessions = Session::get();
+        $result = compact('sessions');
+        return view('session.create', $result);
     }
 
     /**
@@ -37,7 +39,13 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request ->validate([
+            'name'=>'required',
+            'description'=>'required'
+        ]);
+        Session::create($request->all());
+
+        return redirect('session');
     }
 
     /**
