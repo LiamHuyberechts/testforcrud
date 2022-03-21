@@ -68,7 +68,7 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        //
+
     }
 
     /**

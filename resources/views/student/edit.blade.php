@@ -16,7 +16,7 @@
         <select name="team_id">
             @foreach($teams as $team)
                 @if($team->name == $student->team->name)
-                    <option value="{{$team->id}}" selected>{{$team->name}}</option>
+                    <option value="{{$team->id}}" selected>{{$team->name ?? 'No Team'}}</option>
                 @else
                     <option value="{{$team->id}}">{{$team->name}}</option>
                 @endif
