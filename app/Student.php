@@ -13,6 +13,8 @@ class Student extends Model
         'team_id',
         'active'
         ];
+
+
     public function team(){
         return $this->belongsTo(
             "App\Team")->withDefault();

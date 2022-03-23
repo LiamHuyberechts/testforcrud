@@ -24,7 +24,7 @@ Route::get('/', function () {
     $result = compact('students', 'teams', 'sessions');
 
     return view('welcome', $result);
-});
+})->middleware('auth');
 
 Auth::routes();
 
@@ -32,3 +32,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('/student', 'StudentController');
 Route::resource('/team', 'TeamController');
 Route::resource('/session', 'SessionController');
+

@@ -69,6 +69,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
+
         $student = Student::with('team')->findOrFail($id);
         $teams = Team::get();
         $result = compact('student', 'teams');
@@ -91,6 +92,8 @@ class StudentController extends Controller
             'team_id'=>'required',
             'active'=>'required'
         ]);
+
+        dd($request);
         Student::findOrFail($id)->update($request->all());
 
         return redirect('student');

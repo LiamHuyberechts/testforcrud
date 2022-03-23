@@ -20,6 +20,9 @@ class CreateStudentsTable extends Migration
             $table->string("rnumber")->nullable();
             $table->foreignId("team_id")->nullable();
             $table->boolean("active")->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
 
             $table->foreign("team_id")->references("id")->on("teams")->nullOnDelete();
 
